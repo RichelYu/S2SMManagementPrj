@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <!-- 指定Web应用的默认编码集,相当于调用HttpServletRequest的setCharacterEncoding方法 -->
+    <!--<constant name="struts.i18n.encoding" value="UTF-8" />-->
+    <!--该属性指定需要Struts 2处理的请求后缀，该属性的默认值是action，即所有匹配*.action的请求都由Struts2处理。 如果用户需要指定多个请求后缀，则多个后缀之间以英文逗号（,）隔开-->
+    <!--<constant name="struts.action.extension" value="do,action,htm" />-->
+    <!-- strtus2 开放动态方法访问 DMI-->
+    <!--<constant name="struts.enable.DynamicMethodInvocation" value="true"/>-->
+
+    <package name="test" extends="struts-default" namespace="/"
+             strict-method-invocation="false">
+
+        <action name="login" class="controller.IndexAction" method="login" >
+            <result name="success" type="redirect">indexActionRedirect.action</result>
+            <result name="error" type="dispatcher">/error.jsp</result>
+        </action>
+
+        <action name="registerAction" class="controller.IndexAction" method="registerAction">
+            <result name="success">register.jsp</result>
+        </action>
+
+        <action name="register" class="controller.IndexAction" method="register">
+            <result name="success" type="redirect">indexActionRedirect.action</result>
+            <result name="error" type="dispatcher">/error.jsp</result>
+        </action>
+
+        <action name="indexActionRedirect" class="controller.IndexAction" method="indexActionRedirect">
+            <result name="success" type="dispatcher">/index.jsp</result>
+            <result name="error" type="dispatcher">/error.jsp</result>
+        </action>
+
+        <action name="userListAction" class="controller.IndexAction" method="userListAction">
+            <result name="success" type="dispatcher">/tables.jsp</result>
+            <result name="error" type="dispatcher">/error.jsp</result>
+        </action>
+
+        <action name="projectListAction" class="controller.IndexAction" method="projectListAction">
+            <result name="success" type="dispatcher">/project-list.jsp</result>
+            <result name="error" type="dispatcher">/error.jsp</result>
+        </action>
+        <action name="addNewProjectAction" class="controller.IndexAction" method="addNewProjectAction">
+            <result name="success" type="dispatcher">/success.jsp</result>
+        </action>
+
+        <action name="addNewProjectRedirectAction" class="controller.IndexAction" method="addNewProjectRedirectAction">
+            <result name="success" type="dispatcher">/add-new-post.jsp</result>
+        </action>
+
+        <action name="deleteProjectAction" class="controller.IndexAction" method="deleteProjectAction">
+            <result name="success" type="dispatcher">success.jsp</result>
+            <result name="error" type="dispatcher">error.jsp</result>
+        </action>
+    </package>
+
+</struts>

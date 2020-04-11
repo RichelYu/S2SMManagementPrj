@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.UserMapper">
+    <resultMap id="BaseResultMap" type="entity.User">
+        <result property="id" column="id"/>
+        <result property="password" column="password"/>
+        <result property="role" column="role"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <update id="updateProjectStatus">
+        update program set status = 2 where  id = #{projectId}
+    </update>
+
+    <select id="getUser" resultMap="BaseResultMap">
+
+        select * from user where user_id = #{userId}
+    </select>
+    <select id="getAuthorityType" resultType="java.lang.Integer">
+        select count(1) from authority where role = ${role} and operate = ${operate}
+    </select>
+    <select id="getAllUser" resultMap="BaseResultMap">
+        select * from user;
+    </select>
+    <select id="selectAllPrograms" resultType="entity.Program">
+        select * from  program where status = 1;
+    </select>
+
+
+    <insert id="insertUser">
+        insert into user (user_id,user_name,password,create_time,update_time)
+        values (
+        #{newUser.userId},
+        #{newUser.userName},
+        #{newUser.password},
+        now(),
+        now()
+        )
+    </insert>
+    <insert id="insertProgram">
+        insert into program (name,url,create_time,update_time)
+        values (
+        #{program.name},
+        #{program.url},
+        now(),
+        now()
+        )
+    </insert>
+</mapper>
